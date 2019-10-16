@@ -4,7 +4,10 @@ if (process.env.NODE_ENV !== 'production'){
 var express = require('express');
 var app = express();
 var expressLayouts = require('express-ejs-layouts');
+
+// Routers
 var indexRouter = require('./routers/index');
+var authorRouter = require('./routers/authors');
 
 app.set('view engine', 'ejs')
 
@@ -27,5 +30,6 @@ db.once('open',()=>console.log('Connected to database'));
 
 
 app.use('/', indexRouter)
+app.use('/authors', authorRouter)
 
-.listen(3000);
+.listen(process.env.PORT);
