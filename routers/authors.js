@@ -1,6 +1,6 @@
-var express = require("express");
-var router = express.Router();
-var Authors = require("../models/authors");
+const express = require("express");
+const router = express.Router();
+const Authors = require("../models/authors");
 // ALL Authors
 router.get("/", async (req, res) => {
   let searchOptions = {};
@@ -24,11 +24,11 @@ router.get("/new", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  var author = new Authors({
+  const author = new Authors({
     name: req.body.name,
   });
   try {
-    var newAuthor = await author.save();
+    const newAuthor = await author.save();
     //res.redirect('author/${newAuthor.id}')
     res.redirect("authors");
   } catch {
