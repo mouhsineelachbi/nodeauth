@@ -5,6 +5,7 @@ const express = require("express");
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 // Routers
 const indexRouter = require("./routers/index");
@@ -22,8 +23,6 @@ app
   .use(express.static("public"))
 
   .use(bodyParser.urlencoded({ limit: "10mb", extended: false }));
-
-const mongoose = require("mongoose");
 
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
