@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Authors = require("../models/authors");
 const RateLimit = require("express-rate-limit");
+const _ = require("lodash");
 
 const authorsSearchLimiter = RateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -12,7 +13,8 @@ const authorsSearchLimiter = RateLimit({
 router.get("/", authorsSearchLimiter, async (req, res) => {
   let searchOptions = {};
   if (req.query.name !== null && req.query.name !== "") {
-    searchOptions.name = new RegExp(req.query.name, "i");
+    const safeName = _.escapeRegExp(req.query.name);
+    searchOptions.name = new RegExp(safeName, "i");
   }
   try {
     const authors = await Authors.find(searchOptions);
