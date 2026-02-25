@@ -1,8 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const Authors = require("../models/authors");
+const RateLimit = require("express-rate-limit");
+
+const authorsSearchLimiter = RateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs for the authors index
+});
+
 // ALL Authors
-router.get("/", async (req, res) => {
+router.get("/", authorsSearchLimiter, async (req, res) => {
   let searchOptions = {};
   if (req.query.name !== null && req.query.name !== "") {
     searchOptions.name = new RegExp(req.query.name, "i");
