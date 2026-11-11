@@ -15,7 +15,7 @@
     "ejs": "^3.1.10",
     "express": "^4.22.3",
     "express-ejs-layouts": "^2.5.0",
-    "mongoose": "^8.9.5",
+    "mongoose": "^8.24.7",
     "express-rate-limit": "^8.2.1",
     "lodash": "^4.17.23"
   },
